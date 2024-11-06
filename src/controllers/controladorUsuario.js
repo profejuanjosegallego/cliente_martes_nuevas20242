@@ -1,3 +1,5 @@
+import { buscarUsuarios,registrarUsuario } from "../services/serviciosUsuario.js"
+
 //OBJETIVO: RECOGER LOS DATOS DE UN FORMULARIO
 //UTILIZANDO JS
 
@@ -23,7 +25,7 @@ botonRegistro.addEventListener("click",function(evento){
         metaAhorro:metaAhorroUsuario.value
     }
 
-    console.log(objetoEnvioDatosUsuario)
+    registrarUsuario(objetoEnvioDatosUsuario)
 
     /*Swal.fire({
         title: "Good job!",
@@ -37,31 +39,12 @@ botonRegistro.addEventListener("click",function(evento){
 
 //OBJETIVO:RENDERIZAR DATOS QUE VIENEN DEL BACK
 //1. se queman los datos (MOCK)
-let usuarios=[
-    {id:20,nombres:"Juan Jose Gallego",metaAhorro:20000000},
-    {id:30,nombres:"Yasuri Yamile",metaAhorro:10000000},
-    {id:200,nombres:"Pedro Paramo",metaAhorro:40000000},
-    {id:20,nombres:"Juan Jose Gallego",metaAhorro:20000000},
-    {id:30,nombres:"Yasuri Yamile",metaAhorro:10000000},
-    {id:200,nombres:"Pedro Paramo",metaAhorro:40000000},
-    {id:20,nombres:"Juan Jose Gallego",metaAhorro:20000000},
-    {id:30,nombres:"Yasuri Yamile",metaAhorro:10000000},
-    {id:200,nombres:"Pedro Paramo",metaAhorro:40000000},
-    {id:20,nombres:"Juan Jose Gallego",metaAhorro:20000000},
-    {id:30,nombres:"Yasuri Yamile",metaAhorro:10000000},
-    {id:200,nombres:"Pedro Paramo",metaAhorro:40000000},
-    {id:20,nombres:"Juan Jose Gallego",metaAhorro:20000000},
-    {id:30,nombres:"Yasuri Yamile",metaAhorro:10000000},
-    {id:200,nombres:"Pedro Paramo",metaAhorro:40000000},
-    {id:20,nombres:"Juan Jose Gallego",metaAhorro:20000000},
-    {id:30,nombres:"Yasuri Yamile",metaAhorro:10000000},
-    {id:200,nombres:"Pedro Paramo",metaAhorro:40000000}
-]
-
-//2. Recorrer el arreglo de datos del back
+//Llamando a la funcion que va al api a buscar usuarios
+buscarUsuarios().then(function(respuesta){
+    //2. Recorrer el arreglo de datos del back
 let fila=document.getElementById("fila")
-usuarios.forEach(function(usuario){
-    console.log(usuario)
+respuesta.forEach(function(usuario){
+    
     //2.1 TRAVERSING
     let columna=document.createElement("div")
     columna.classList.add("col")
@@ -78,3 +61,8 @@ usuarios.forEach(function(usuario){
     fila.appendChild(columna)
 
 })
+})
+
+
+
+
